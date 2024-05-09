@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:foodpedia_app/data/models/response/auth_response_model.dart';
+import 'package:foodpedia_app/data/models/auth_response_model.dart';
 
 class AuthRemoteDatasource {
   FirebaseAuth auth = FirebaseAuth.instance;

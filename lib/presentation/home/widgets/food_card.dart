@@ -3,11 +3,14 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodpedia_app/core/components/spaces.dart';
 import 'package:foodpedia_app/core/constants/colors.dart';
 import 'package:foodpedia_app/core/constants/images.dart';
+import 'package:foodpedia_app/data/models/food_response_model.dart';
 import 'package:foodpedia_app/presentation/home/pages/food_detail_page.dart';
 
 class FoodCard extends StatelessWidget {
+  final FoodResponseModel food;
   const FoodCard({
     super.key,
+    required this.food,
   });
 
   @override
@@ -18,7 +21,7 @@ class FoodCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return const FoodDetailPage();
+              return FoodDetailPage(food: food);
             },
           ),
         );
@@ -33,20 +36,21 @@ class FoodCard extends StatelessWidget {
             /// Image
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
+              child: Image.network(
                 height: 80,
                 width: 80,
-                AppImage.product,
+                food.image ?? 'No Image',
                 fit: BoxFit.cover,
               ),
             ),
+      
             const SpaceWidth(12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Nasi Padang',
+                    food.name ?? 'No Name',
                     style: blackTextStyle.copyWith(
                       fontSize: 16,
                       fontWeight: medium,
@@ -54,18 +58,9 @@ class FoodCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text(
-                    'Makanan Berat',
-                    style: greyTextStyle.copyWith(
-                      fontSize: 12,
-                      fontWeight: light,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
                   const SpaceHeight(4),
                   Text(
-                    '25.000',
+                    food.price.toString(),
                     style: blackTextStyle.copyWith(
                       fontWeight: regular,
                     ),
@@ -76,10 +71,11 @@ class FoodCard extends StatelessWidget {
               ),
             ),
             RatingBar.builder(
-              initialRating: 5,
+              initialRating: food.rating ?? 0,
               minRating: 1,
               direction: Axis.horizontal,
               allowHalfRating: true,
+              ignoreGestures: true,
               itemCount: 5,
               itemSize: 16,
               itemBuilder: (context, _) => const Icon(
@@ -92,7 +88,7 @@ class FoodCard extends StatelessWidget {
             ),
             const SpaceWidth(8),
             Text(
-              '5.0',
+              food.rating.toString(),
               style: greyTextStyle.copyWith(
                 fontWeight: medium,
               ),

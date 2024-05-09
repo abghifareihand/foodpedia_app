@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodpedia_app/core/components/spaces.dart';
 import 'package:foodpedia_app/core/constants/colors.dart';
 import 'package:foodpedia_app/core/constants/images.dart';
+import 'package:foodpedia_app/data/models/food_response_model.dart';
+import 'package:foodpedia_app/presentation/home/pages/cart_page.dart';
 
 class FoodDetailPage extends StatelessWidget {
+  final FoodResponseModel food;
   const FoodDetailPage({
     super.key,
+    required this.food,
   });
 
   @override
@@ -16,10 +19,10 @@ class FoodDetailPage extends StatelessWidget {
       body: Stack(
         children: [
           ClipRRect(
-            child: Image.asset(
+            child: Image.network(
               height: 300,
               width: double.infinity,
-              AppImage.product,
+              food.image!,
               fit: BoxFit.cover,
             ),
           ),
@@ -74,7 +77,7 @@ class FoodDetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Nasi Padang',
+                          food.name!,
                           style: blackTextStyle.copyWith(
                             fontSize: 18,
                             fontWeight: medium,
@@ -86,10 +89,11 @@ class FoodDetailPage extends StatelessWidget {
                         Row(
                           children: [
                             RatingBar.builder(
-                              initialRating: 5,
+                              initialRating: food.rating!,
                               minRating: 1,
                               direction: Axis.horizontal,
                               allowHalfRating: true,
+                              ignoreGestures: true,
                               itemCount: 5,
                               itemSize: 20,
                               itemBuilder: (context, _) => const Icon(
@@ -102,7 +106,7 @@ class FoodDetailPage extends StatelessWidget {
                             ),
                             const SpaceWidth(8),
                             Text(
-                              '5.0',
+                              food.rating.toString(),
                               style: greyTextStyle.copyWith(
                                 fontWeight: medium,
                               ),
@@ -117,7 +121,7 @@ class FoodDetailPage extends StatelessWidget {
                 ),
                 const SpaceHeight(20),
                 Text(
-                  'Description',
+                  food.description!,
                   style: greyTextStyle.copyWith(
                     fontSize: 14,
                     fontWeight: regular,
@@ -128,6 +132,31 @@ class FoodDetailPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        height: 80,
+        color: Colors.white,
+        padding: const EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 16,
+        ),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColor.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CartPage(food: food),
+              ),
+            );
+          },
+          child: const Text('Book Now'),
+        ),
       ),
     );
   }

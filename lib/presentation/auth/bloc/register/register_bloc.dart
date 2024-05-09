@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodpedia_app/data/datasources/auth_remote_datasource.dart';
-import 'package:foodpedia_app/data/models/response/auth_response_model.dart';
+import 'package:foodpedia_app/data/models/auth_response_model.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';

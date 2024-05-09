@@ -7,7 +7,10 @@ import 'package:foodpedia_app/presentation/auth/bloc/user/user_bloc.dart';
 import 'package:foodpedia_app/presentation/auth/pages/login_page.dart';
 import 'package:foodpedia_app/presentation/auth/pages/register_page.dart';
 import 'package:foodpedia_app/presentation/auth/pages/splash_page.dart';
+import 'package:foodpedia_app/presentation/home/bloc/food/food_bloc.dart';
+import 'package:foodpedia_app/presentation/home/bloc/order/order_bloc.dart';
 import 'package:foodpedia_app/presentation/profile/bloc/logout/logout_bloc.dart';
+import 'package:foodpedia_app/presentation/transaction/bloc/transaction/transaction_bloc.dart';
 
 import 'firebase_options.dart';
 
@@ -37,6 +40,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LogoutBloc(),
+        ),
+        BlocProvider(
+          create: (context) => FoodBloc(),
+        ),
+        BlocProvider(
+          create: (context) => OrderBloc(),
+        ),
+        BlocProvider(
+          create: (context) => TransactionBloc(),
         ),
       ],
       child: MaterialApp(
