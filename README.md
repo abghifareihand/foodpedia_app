@@ -1,6 +1,11 @@
 # Foodpedia App
 
-### Stack:
-- Database Firebase
+### Stack :
+- Backend Firebase
 - State Management Bloc
 
+### Feature :
+- Register/Login User
+- List Food
+- Detail Food
+- Transaction
