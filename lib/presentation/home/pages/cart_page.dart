@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foodpedia_app/core/components/input_field.dart';
 import 'package:foodpedia_app/core/components/spaces.dart';
 import 'package:foodpedia_app/core/constants/colors.dart';
 import 'package:foodpedia_app/core/constants/formatter.dart';
@@ -99,21 +100,11 @@ class _CartPageState extends State<CartPage> {
               ),
             ],
           ),
-          const SpaceHeight(40),
-          TextFormField(
-            keyboardType: TextInputType.number,
-            controller: _quantityController,
-            decoration: InputDecoration(
-              labelText: 'Quantity',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.0),
-                borderSide: const BorderSide(
-                  color: Colors.grey,
-                ),
-              ),
-            ),
-          ),
           const SpaceHeight(20),
+          InputField.number(
+            controller: _quantityController,
+            label: 'Quantity',
+          ),
         ],
       ),
       bottomNavigationBar: Container(

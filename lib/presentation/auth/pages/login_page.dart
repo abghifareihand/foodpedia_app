@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:foodpedia_app/core/components/input_field.dart';
 import 'package:foodpedia_app/core/components/spaces.dart';
 import 'package:foodpedia_app/core/constants/colors.dart';
 import 'package:foodpedia_app/core/constants/images.dart';
@@ -34,30 +35,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           const SizedBox(height: 30),
-          TextFormField(
+          InputField.email(
             controller: _emailController,
-            decoration: InputDecoration(
-              labelText: 'Email',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.0),
-                borderSide: const BorderSide(
-                  color: Colors.grey,
-                ),
-              ),
-            ),
+            label: 'Email',
           ),
-          const SizedBox(height: 20),
-          TextFormField(
+          InputField.password(
             controller: _passwordController,
-            decoration: InputDecoration(
-              labelText: 'Password',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.0),
-                borderSide: const BorderSide(
-                  color: Colors.grey,
-                ),
-              ),
-            ),
+            label: 'Password',
           ),
           const SizedBox(height: 30),
           SizedBox(
