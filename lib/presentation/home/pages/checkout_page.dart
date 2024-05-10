@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:foodpedia_app/core/components/dialog.dart';
 import 'package:foodpedia_app/core/components/spaces.dart';
 import 'package:foodpedia_app/core/constants/colors.dart';
 import 'package:foodpedia_app/core/constants/formatter.dart';
 import 'package:foodpedia_app/core/constants/images.dart';
 import 'package:foodpedia_app/data/models/transaction_response_model.dart';
+import 'package:foodpedia_app/presentation/dashboard/dashboard_page.dart';
 
 import '../bloc/order/order_bloc.dart';
 
@@ -21,6 +23,11 @@ class CheckoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: AppColor.primary,
+        title: const Text('Checkout Page'),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
@@ -37,7 +44,6 @@ class CheckoutPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // TODO : DESTINATION TILE
                 Row(
                   children: [
                     Container(
@@ -101,21 +107,19 @@ class CheckoutPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 const SpaceHeight(30),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Jumlah Pesanan',
+                      'Quantity',
                       style: blackTextStyle.copyWith(
                         fontSize: 16,
                         fontWeight: medium,
                       ),
                     ),
                     Text(
-                      '${transaction.quantity} porsi',
+                      '${transaction.quantity} pcs',
                       style: blackTextStyle.copyWith(
                         fontSize: 16,
                         fontWeight: medium,
@@ -128,7 +132,7 @@ class CheckoutPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Total Harga',
+                      'Total Price',
                       style: blackTextStyle.copyWith(
                         fontSize: 16,
                         fontWeight: medium,
@@ -164,11 +168,21 @@ class CheckoutPage extends StatelessWidget {
               child: BlocConsumer<OrderBloc, OrderState>(
                 listener: (context, state) {
                   if (state is OrderLoaded) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(state.message),
-                        backgroundColor: Colors.green,
-                      ),
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return CustomDialog(
+                          title: 'Success',
+                          message: 'Order ${transaction.food.name} Success',
+                          onPressed: () => Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DashboardPage(),
+                              ),
+                              (route) => false),
+                        );
+                      },
                     );
                   }
                   if (state is OrderError) {

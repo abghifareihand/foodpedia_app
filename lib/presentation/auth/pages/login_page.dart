@@ -2,8 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:foodpedia_app/core/components/spaces.dart';
+import 'package:foodpedia_app/core/constants/colors.dart';
+import 'package:foodpedia_app/core/constants/images.dart';
 import 'package:foodpedia_app/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:foodpedia_app/presentation/auth/bloc/user/user_bloc.dart';
+import 'package:foodpedia_app/presentation/auth/pages/register_page.dart';
 import 'package:foodpedia_app/presentation/dashboard/dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -24,6 +28,14 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(20),
         children: [
           const SizedBox(height: 40),
+          ClipRRect(
+            child: Image.asset(
+              height: 200,
+              width: 200,
+              AppImage.logo,
+            ),
+          ),
+          const SizedBox(height: 30),
           TextFormField(
             controller: _emailController,
             decoration: InputDecoration(
@@ -54,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 50,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.primary,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -67,10 +80,6 @@ class _LoginPageState extends State<LoginPage> {
               child: BlocConsumer<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is LoginLoaded) {
-                    final user = FirebaseAuth.instance.currentUser;
-                    context
-                        .read<UserBloc>()
-                        .add(GetUserEvent(userId: user!.uid));
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -101,6 +110,32 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
             ),
+          ),
+          const SpaceHeight(20.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Dont have an account? ',
+                style: blackTextStyle.copyWith(),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RegisterPage(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Register',
+                  style: primaryTextStyle.copyWith(
+                    fontWeight: medium,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

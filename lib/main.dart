@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodpedia_app/core/constants/colors.dart';
 import 'package:foodpedia_app/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:foodpedia_app/presentation/auth/bloc/register/register_bloc.dart';
 import 'package:foodpedia_app/presentation/auth/bloc/user/user_bloc.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColor.primary),
           useMaterial3: false,
         ),
         home: const SplashPage(),

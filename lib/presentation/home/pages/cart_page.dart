@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodpedia_app/core/components/spaces.dart';
 import 'package:foodpedia_app/core/constants/colors.dart';
 import 'package:foodpedia_app/core/constants/formatter.dart';
@@ -19,6 +20,7 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColor.primary,
@@ -27,25 +29,82 @@ class _CartPageState extends State<CartPage> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          ListTile(
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                height: 40,
-                width: 40,
-                widget.food.image ?? 'No Image',
-                fit: BoxFit.cover,
+          Row(
+            children: [
+              /// Image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  height: 80,
+                  width: 80,
+                  widget.food.image!,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            title: Text(widget.food.name!),
-            subtitle: Text(priceFormat(widget.food.price)),
+
+              const SpaceWidth(12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.food.name!,
+                    style: blackTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: medium,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SpaceHeight(4),
+                  Text(
+                    priceFormat(widget.food.price),
+                    style: blackTextStyle.copyWith(
+                      fontWeight: regular,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SpaceHeight(8),
+                  Row(
+                    children: [
+                      RatingBar.builder(
+                        initialRating: widget.food.rating ?? 0,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        ignoreGestures: true,
+                        itemCount: 5,
+                        itemSize: 20,
+                        itemBuilder: (context, _) => const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {
+                          // Lakukan sesuatu ketika rating diperbarui
+                        },
+                      ),
+                      const SpaceWidth(8),
+                      Text(
+                        widget.food.rating.toString(),
+                        style: greyTextStyle.copyWith(
+                          fontSize: 16,
+                          fontWeight: medium,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
-          const SpaceHeight(20),
+          const SpaceHeight(40),
           TextFormField(
             keyboardType: TextInputType.number,
             controller: _quantityController,
             decoration: InputDecoration(
-              labelText: 'Masukkan Jumlah Pesanan',
+              labelText: 'Quantity',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.0),
                 borderSide: const BorderSide(

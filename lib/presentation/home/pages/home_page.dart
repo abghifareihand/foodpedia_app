@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    context.read<UserBloc>().add(GetUserEvent());
     context.read<FoodBloc>().add(GetFoodEvent());
     super.initState();
   }
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 );
                               }
-                              return const SizedBox.shrink();
+                              return const SizedBox();
                             },
                           ),
                         ],

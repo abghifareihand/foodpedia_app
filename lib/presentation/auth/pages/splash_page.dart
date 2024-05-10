@@ -29,7 +29,6 @@ class _SplashPageState extends State<SplashPage> {
         );
       } else {
         debugPrint(user.email);
-        context.read<UserBloc>().add(GetUserEvent(userId: user.uid));
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -50,7 +49,7 @@ class _SplashPageState extends State<SplashPage> {
           children: [
             Text(
               'FOODPEDIA',
-              style: blackTextStyle.copyWith(
+              style: primaryTextStyle.copyWith(
                 fontSize: 32,
                 fontWeight: bold,
                 letterSpacing: 11,

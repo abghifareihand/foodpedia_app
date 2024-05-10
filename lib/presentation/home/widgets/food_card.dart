@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodpedia_app/core/components/spaces.dart';
 import 'package:foodpedia_app/core/constants/colors.dart';
+import 'package:foodpedia_app/core/constants/formatter.dart';
 import 'package:foodpedia_app/core/constants/images.dart';
 import 'package:foodpedia_app/data/models/food_response_model.dart';
 import 'package:foodpedia_app/presentation/home/pages/food_detail_page.dart';
@@ -43,14 +44,14 @@ class FoodCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-      
+
             const SpaceWidth(12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    food.name ?? 'No Name',
+                    food.name!,
                     style: blackTextStyle.copyWith(
                       fontSize: 16,
                       fontWeight: medium,
@@ -60,7 +61,7 @@ class FoodCard extends StatelessWidget {
                   ),
                   const SpaceHeight(4),
                   Text(
-                    food.price.toString(),
+                    priceFormat(food.price),
                     style: blackTextStyle.copyWith(
                       fontWeight: regular,
                     ),
