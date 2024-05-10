@@ -3,7 +3,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodpedia_app/core/components/spaces.dart';
 import 'package:foodpedia_app/core/constants/colors.dart';
 import 'package:foodpedia_app/core/constants/formatter.dart';
-import 'package:foodpedia_app/core/constants/images.dart';
 import 'package:foodpedia_app/data/models/food_response_model.dart';
 import 'package:foodpedia_app/presentation/home/pages/food_detail_page.dart';
 

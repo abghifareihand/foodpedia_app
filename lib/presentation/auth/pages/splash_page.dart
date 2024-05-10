@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodpedia_app/core/constants/colors.dart';
-import 'package:foodpedia_app/presentation/auth/bloc/user/user_bloc.dart';
 import 'package:foodpedia_app/presentation/auth/pages/login_page.dart';
 import 'package:foodpedia_app/presentation/dashboard/dashboard_page.dart';
 

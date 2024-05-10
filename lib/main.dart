@@ -5,8 +5,6 @@ import 'package:foodpedia_app/core/constants/colors.dart';
 import 'package:foodpedia_app/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:foodpedia_app/presentation/auth/bloc/register/register_bloc.dart';
 import 'package:foodpedia_app/presentation/auth/bloc/user/user_bloc.dart';
-import 'package:foodpedia_app/presentation/auth/pages/login_page.dart';
-import 'package:foodpedia_app/presentation/auth/pages/register_page.dart';
 import 'package:foodpedia_app/presentation/auth/pages/splash_page.dart';
 import 'package:foodpedia_app/presentation/home/bloc/food/food_bloc.dart';
 import 'package:foodpedia_app/presentation/home/bloc/order/order_bloc.dart';
