@@ -1,11 +1,17 @@
 # Foodpedia App
 
+<img src="https://i.ibb.co/HxxD6B1/foodpedia.png"/>
+
 ### Stack :
-- Backend Firebase
+- Firebase Authentication
+- Firebase Firestore Database
+- Firebase Storage
 - State Management Bloc
 
 ### Feature :
-- Register/Login User
+- Register User
+- Login User
 - List Food
 - Detail Food
-- Transaction
+- List Transaction by User
+- Profile User
